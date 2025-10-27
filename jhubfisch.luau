@@ -124,6 +124,34 @@ do
 	end
 end
 
-window:addMenu({
-	text = "menu 2",
+local m2 = window:addMenu({
+	text = "Miscelanious",
 })
+do
+	local m2s1 = m2:addSection({
+		text = "Self",
+		side = "auto",
+		showMinButton = true,
+	})
+	do
+		m2s1:addLabel({
+			text = "Visuals", -- Self explanatory
+		})
+
+		local m2s1t1 = m2s1:addToggle({
+			text = "Cham",
+			state = false, -- Starting state of the toggle - doesn't automatically call the callback
+		})
+
+		m2s1t1:bindToEvent("onToggle", function(newState) -- Call a function when toggled
+			ui.notify({
+				title = "Cham toggled",
+				message = "Cham was toggled to " .. tostring(newState),
+				duration = 3,
+			})
+			if newState == true then
+				print("placeholder")
+			end
+		end)
+	end
+end
