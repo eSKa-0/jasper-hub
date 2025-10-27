@@ -1,20 +1,26 @@
--- Dollarware example script
+local PLAYERS = game:GetService("Players")
+local PLAYER = PLAYERS.LocalPlayer
+local RS = game:GetService("RunService")
+local CHAR = PLAYER.Character
 
--- Snag the ui loader function thingy (loadstring the link, but dont call it)
+--cham stuff
+local highlight = Instance.new("Highlight")
+highlight.Adornee = CHAR
+highlight.Parent = CHAR
+highlight.Enabled = false
+highlight.FillColor = Color3.fromRGB(255, 0, 0)
+highlight.FillTransparency = 0
+highlight.OutlineTransparency = 1
+highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+
 local uiLoader = loadstring(game:HttpGet("https://raw.githubusercontent.com/topitbopit/dollarware/main/library.lua"))
--- Because of the way the library loads, settings are handled on the loadstring call
 local ui = uiLoader({
 	rounding = false, -- Whether certain features get rounded
 	theme = "watermelon", -- The theme. Available themes are: cherry, orange, lemon, lime, raspberry, blueberry, grape, watermelon
 	smoothDragging = true, -- Smooth dragging
 })
 
-ui.autoDisableToggles = true -- All toggles will automatically be disabled when the ui is destroyed (window is closed)
--- so you don't have to manually handle everything. This defaults to true!
-
--- Make a window, which houses all the stuff for the gui
--- Technically multiple windows can be made, but there is no (and likely wont ever be) official support for them
--- since its a lot of work for such a minute use
+ui.autoDisableToggles = true
 local window = ui.newWindow({
 	text = "Jasper Hub | Fisch", -- Title of window
 	resize = true, -- Ability to resize
@@ -26,7 +32,6 @@ local menu = window:addMenu({
 	text = "Auto Fisch", -- Title of menu
 })
 do
-	-- Menus have sections which house all the controls
 	local section = menu:addSection({
 		text = "Config", -- Title of section
 		side = "auto", -- Side of the menu that the section is placed on. Defaults to 'auto', but can be 'left' or 'right'
@@ -149,16 +154,14 @@ do
 				message = "Cham was toggled to " .. tostring(newState),
 				duration = 3,
 			})
-			if newState == true then
-				print("placeholder")
-			end
+			highlight.Enabled = newState
 		end)
 
 		local m2s1c1 = m2s1:addColorPicker({
 			text = "color picker",
 			color = Color3.fromRGB(255, 0, 0),
 		}, function(newColor)
-			print(newColor)
+			highlight.FillColor = newColor
 		end)
 	end
 end
