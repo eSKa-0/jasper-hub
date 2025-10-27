@@ -129,17 +129,17 @@ local m2 = window:addMenu({
 })
 do
 	local m2s1 = m2:addSection({
-		text = "Self",
+		text = "Cham",
 		side = "auto",
 		showMinButton = true,
 	})
 	do
 		m2s1:addLabel({
-			text = "Visuals", -- Self explanatory
+			text = "", -- Self explanatory
 		})
 
 		local m2s1t1 = m2s1:addToggle({
-			text = "Cham",
+			text = "Toggle",
 			state = false, -- Starting state of the toggle - doesn't automatically call the callback
 		})
 
@@ -152,6 +152,13 @@ do
 			if newState == true then
 				print("placeholder")
 			end
+		end)
+
+		local m2s1c1 = m2s1:addColorPicker({
+			text = "color picker",
+			color = Color3.fromRGB(255, 0, 0),
+		}, function(newColor)
+			print(newColor)
 		end)
 	end
 end
