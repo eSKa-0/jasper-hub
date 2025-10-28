@@ -43,15 +43,17 @@ do
 			text = "Change the walkspeed", -- Self explanatory
 		})
 
-		section:addSlider({
-			text = "Speed",
-			min = 1,
-			max = 50,
-			step = 1,
-			val = 16,
-		}, function(newValue)
-			CHAR:WaitForChild("Humanoid").WalkSpeed = newValue
-		end)
+		section
+			:addSlider({
+				text = "Speed",
+				min = 1,
+				max = 50,
+				step = 1,
+				val = 16,
+			}, function(newValue)
+				CHAR:WaitForChild("Humanoid").WalkSpeed = newValue
+			end)
+			:setTooltip("Value of Walkspeed")
 
 		local toggle = section:addToggle({
 			text = "Enable",
