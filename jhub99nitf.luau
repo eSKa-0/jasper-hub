@@ -43,7 +43,7 @@ do
 			text = "Change the walkspeed", -- Self explanatory
 		})
 
-		section:addslider({
+		section:addSlider({
 			text = "Speed",
 			min = 1,
 			max = 50,
