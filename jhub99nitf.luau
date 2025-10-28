@@ -13,6 +13,13 @@ highlight.FillTransparency = 0
 highlight.OutlineTransparency = 1
 highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 
+local Settings = {
+	Walkspeed = {
+		State = false,
+		Value = 16,
+	},
+}
+
 local uiLoader = loadstring(game:HttpGet("https://raw.githubusercontent.com/topitbopit/dollarware/main/library.lua"))
 local ui = uiLoader({
 	rounding = false, -- Whether certain features get rounded
@@ -46,12 +53,15 @@ do
 		section
 			:addSlider({
 				text = "Speed",
-				min = 1,
+				min = 16,
 				max = 50,
 				step = 1,
 				val = 16,
 			}, function(newValue)
-				CHAR:WaitForChild("Humanoid").WalkSpeed = newValue
+				Settings.Walkspeed.Value = newValue
+				if Settings.Walkspeed.State == true then
+					CHAR:WaitForChild("Humanoid").WalkSpeed = Settings.Walkspeed.Value
+				end
 			end)
 			:setTooltip("Value of Walkspeed")
 
@@ -66,6 +76,13 @@ do
 				message = "Walkspeed was toggled to " .. tostring(newState),
 				duration = 3,
 			})
+			Settings.Walkspeed.State = newState
+			if newState == false then
+				CHAR:WaitForChild("Humanoid").WalkSpeed = 16
+			end
+			if newState == true then
+				CHAR:WaitForChild("Humanoid").WalkSpeed = Settings.Walkspeed.Value
+			end
 		end)
 
 		section
