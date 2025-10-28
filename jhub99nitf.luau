@@ -29,29 +29,39 @@ local window = ui.newWindow({
 })
 
 local menu = window:addMenu({
-	text = "Auto Fisch", -- Title of menu
+	text = "Local Player", -- Title of menu
 })
 do
 	local section = menu:addSection({
-		text = "Config", -- Title of section
+		text = "WalkSpeed", -- Title of section
 		side = "auto", -- Side of the menu that the section is placed on. Defaults to 'auto', but can be 'left' or 'right'
 		showMinButton = true, -- Ability to minimize this section. Defaults to true
 	})
 
 	do
 		section:addLabel({
-			text = "text", -- Self explanatory
+			text = "Change the walkspeed", -- Self explanatory
 		})
 
+		section:addslider({
+			text = "Speed",
+			min = 1,
+			max = 50,
+			step = 1,
+			val = 16,
+		}, function(newValue)
+			CHAR:WaitForChild("Humanoid").WalkSpeed = newValue
+		end)
+
 		local toggle = section:addToggle({
-			text = "toggle",
+			text = "Enable",
 			state = false, -- Starting state of the toggle - doesn't automatically call the callback
 		})
 
 		toggle:bindToEvent("onToggle", function(newState) -- Call a function when toggled
 			ui.notify({
 				title = "toggle",
-				message = "Toggle was toggled to " .. tostring(newState),
+				message = "Walkspeed was toggled to " .. tostring(newState),
 				duration = 3,
 			})
 		end)
